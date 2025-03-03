@@ -1,10 +1,31 @@
 import React from "react";
+import { createID, saveEntry, validateEntry } from "../modules/utils";
 
-const EntryModal = () => {
+const EntryModal = (props) => {
+  const addEntry = (formData) => {
+    console.log(formData);
 
+    // Retrieve form data
+    const data = Object.fromEntries(formData);
 
+    // Sanitize
+    const cleanEntry = {
+      id: createID(),
+      title: data.title.trim(),
+      imageURL: data.imageURL.trim(),
+      entryInput: data.entryInput,
+      date: createID(),
+    };
 
-    
+    // Validation
+    if (validateEntry(cleanEntry)) {
+      // Save
+      saveEntry(cleanEntry);
+      // Close modal
+      props.toggleModal();
+    }
+  };
+
   return (
     <>
       {/* Main modal */}
@@ -23,6 +44,7 @@ const EntryModal = () => {
                 Create New Entry
               </h3>
               <button
+                onClick={props.toggleModal}
                 type="button"
                 className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               >
@@ -45,7 +67,7 @@ const EntryModal = () => {
               </button>
             </div>
             {/*  Modal body */}
-            <form className="p-4 md:p-5">
+            <form action={addEntry} className="p-4 md:p-5">
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
@@ -59,8 +81,8 @@ const EntryModal = () => {
                     name="title"
                     id="title"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type title"
-                    required=""
+                    placeholder="Program of the day"
+                    required
                   />
                 </div>
                 <div className="col-span-2">
@@ -72,11 +94,11 @@ const EntryModal = () => {
                   </label>
                   <input
                     type="text"
-                    name="title"
-                    id="title"
+                    name="imageURL"
+                    id="imageURL"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                    placeholder="Type title"
-                    required=""
+                    placeholder="https://placehold.co/600x400/png"
+                    required
                   />
                 </div>
 
@@ -89,9 +111,11 @@ const EntryModal = () => {
                   </label>
                   <textarea
                     id="entryInput"
+                    name="entryInput"
                     rows="4"
                     className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Insert entry"
+                    placeholder="I had a wonderful day"
+                    required
                   ></textarea>
                 </div>
               </div>

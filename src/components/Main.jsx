@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import { entriesArr } from "../assets/mockData";
 import Card from "./Card";
-import DisplayModal from "./DisplayModal";
 
 const Main = () => {
   const [cards, setCards] = useState(entriesArr);
-  const [showCard, setShowCard] = useState(false);
+  const [showCardModal, setShowCardModal] = useState(false);
 
-  console.log("cards", cards);
+  //console.log("cards", cards);
 
-  const toggleShow = () => {
-    setShowCard((prevShow) => !prevShow);
-  };
-
-  const showModal = (id) => {
+  const toggleShow = (id) => {
     console.log(`Show Card ${id}`);
+    setShowCardModal((prevShow) => !prevShow);
   };
 
-  const displayCards = cards.map((card) => (
+  const displayCards = cards.map((item) => (
     <Card
-      key={card.id}
-      id={card.id}
-      showModal={showModal}
+      key={item.id}
+      id={item.id}
       toggleShow={toggleShow}
-      card={card}
+      showCardModal={showCardModal}
+      card={item}
     />
   ));
 
@@ -31,7 +27,6 @@ const Main = () => {
     <>
       <main className="grid grid-cols-2 md:grid-cols-3 gap-4 m-5">
         {displayCards.length > 0 ? displayCards : <p>No Info Available</p>}
-        {showCard && <DisplayModal toggleShow={toggleShow} />}
       </main>
     </>
   );

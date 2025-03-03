@@ -23,7 +23,7 @@ export const entriesArr = [
     date: "2025-2-12",
   },
   {
-    id: "2025-2-13-",
+    id: "2025-2-13",
     title: "Distinctio architecto aperiam quisquam",
     imageURL: "https://picsum.photos/seed/aperiam/200/300",
     entryInput:

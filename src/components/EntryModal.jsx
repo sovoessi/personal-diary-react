@@ -14,6 +14,7 @@ const EntryModal = (props) => {
       title: data.title.trim(),
       imageURL: data.imageURL.trim(),
       entryInput: data.entryInput,
+      display: false,
       date: createID(),
     };
 
@@ -30,7 +31,7 @@ const EntryModal = (props) => {
     <>
       {/* Main modal */}
       <div
-        id="authentication-modal"
+        id="entry-modal"
         tabIndex="-1"
         aria-hidden="true"
         className="fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"

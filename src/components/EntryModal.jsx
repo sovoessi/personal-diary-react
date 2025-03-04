@@ -13,7 +13,7 @@ const EntryModal = (props) => {
       id: createID(),
       title: data.title.trim(),
       imageURL: data.imageURL.trim(),
-      entryInput: data.entryInput,
+      entryInput: data.entryInput.trim(),
       date: createID(),
     };
 

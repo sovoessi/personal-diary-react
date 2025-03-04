@@ -3,8 +3,8 @@ import { entriesArr } from "../assets/mockData";
 import Card from "./Card";
 
 const Main = () => {
-  const [cards, setCards] = useState(entriesArr);
   const [showCardModal, setShowCardModal] = useState(false);
+  const [cards, setCards] = React.useState(entriesArr);
 
   //console.log("cards", cards);
 

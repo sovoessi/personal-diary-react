@@ -23,7 +23,7 @@ export const saveEntry = (obj) => {
     
     if(!localDataArray.find((elt) => elt.id === obj.id)){
         //Update array
-        localDataArray.push(obj);
+        localDataArray.unshift(obj);
 
         //Store array
         localStorage.setItem("diaryEntries", JSON.stringify(localDataArray));

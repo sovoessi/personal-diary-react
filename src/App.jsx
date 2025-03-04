@@ -5,7 +5,7 @@ import EntryModal from "./components/EntryModal";
 
 function App() {
   const [showEntry, setShowEntry] = React.useState(false);
-
+  
   const toggleModal = () => {
     setShowEntry((prev) => !prev);
   };
@@ -14,7 +14,7 @@ function App() {
     <>
       <Header toggleModal={toggleModal} />
       {showEntry && <EntryModal toggleModal={toggleModal}/>}
-      <Main />
+      <Main/>
     </>
   );
 }

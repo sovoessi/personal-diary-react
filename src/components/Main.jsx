@@ -1,24 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import DisplayModal from "./DisplayModal";
 import { entriesArr } from "../assets/mockData";
 import Card from "./Card";
 
 const Main = () => {
   const [showCardModal, setShowCardModal] = useState(false);
-  const [cards, setCards] = React.useState(entriesArr);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [storedCards, setCards] = React.useState(entriesArr);
 
-  //console.log("cards", cards);
-
-  const toggleShow = (id) => {
-    console.log(`Show Card ${id}`);
-    setShowCardModal((prevShow) => !prevShow);
+/*   useEffect(() => {
+    const storedCards = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+    setCards(storedCards);
+  }, []); */
+ 
+  const toggleShow = (card) => {
+    console.log(`Show Card ${card}`);
+    setSelectedCard(card);
+    setShowCardModal(prevShow => !prevShow);
   };
 
-  const displayCards = cards.map((item) => (
+  const handleClose = () => {
+    setShowCardModal(prevShow => !prevShow);
+    setSelectedCard(null);
+  };
+
+
+  const displayCards = storedCards.map((item) => (
     <Card
       key={item.id}
       id={item.id}
-      toggleShow={toggleShow}
-      showCardModal={showCardModal}
+      toggleShow={() => toggleShow(item)}
       card={item}
     />
   ));
@@ -27,6 +38,10 @@ const Main = () => {
     <>
       <main className="grid grid-cols-2 md:grid-cols-3 gap-4 m-5">
         {displayCards.length > 0 ? displayCards : <p>No Info Available</p>}
+        
+        {selectedCard && (
+        <DisplayModal show={showCardModal} onClose={handleClose} card={selectedCard} />
+      )}
       </main>
     </>
   );

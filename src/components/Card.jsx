@@ -1,5 +1,4 @@
 import React from "react";
-import DisplayModal from "./DisplayModal";
 
 const Card = (props) => {
   return (
@@ -46,9 +45,6 @@ const Card = (props) => {
           </p>
         </div>
       </div>
-      {props.showCardModal ? (
-        <DisplayModal toggleShow={props.toggleShow} card={props.card} />
-      ) : null}
     </>
   );
 };
